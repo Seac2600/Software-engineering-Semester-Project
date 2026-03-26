@@ -1,0 +1,32 @@
+we will be starting the login user story and admin user story 
+
+for the login user story 
+
+* we want a unique email for each person 
+a time out feature for the application
+* if login is unsccessful say login or password is wrong 
+* if login is successful give access to who logged in 
+a forgot login or password feature
+
+requirments 
+have a html web page for a login application
+in the web page have a login feature that access a database on the server
+check if the login is successful 
+if login is successful a brand new html page for the user
+
+admin user story 
+* needs to have a special admin login
+* able to input new users into different roles
+* able to delete users from assigned roles
+being able to put who is on shift for that week
+handles employee information
+
+requrimetns 
+have a unique web page interface for the admin
+have a option to click on user roles 
+    - within user roles be able to 
+    -add, delete and modify the roles of the user
+have an option to create a brand new user profile 
+    - make each user be assigned to a specific email 
+
+
