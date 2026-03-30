@@ -1,6 +1,6 @@
 package models;
-return that boi now
-public class admin {
+
+public class User {
     public static void main(String[] args) 
     {
     }
