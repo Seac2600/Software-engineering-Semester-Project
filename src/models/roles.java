@@ -2,17 +2,14 @@ package models;
 
 public class roles {
     private int id;
-    private static String[] roleNames; 
-
-    
+    private String name;
 
     public roles() {
-        roleNames = new String[]{"Admin", "Dentist", "Receptionist", "patient"};
     }
 
     public roles(int id, String name) {
         this.id = id;
-        roleNames = new String[]{"Admin", "Dentist", "Receptionist", "patient"};
+        this.name = name;
     }
 
     public int getId() {
@@ -24,10 +21,23 @@ public class roles {
     }
 
     public String getName() {
-        return roleNames[id];
+        return name;
     }
 
     public void setRoleName(String name) {
-        this.roleNames[id] = name;
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
+
+
+
+
+
+
+
+
