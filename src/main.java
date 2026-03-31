@@ -1,19 +1,24 @@
 
+import data.employeeRecords;
+import java.util.List;
+import javax.swing.SwingUtilities;
 import models.User;
-import models.roles;
 import services.adminMangment;
 import services.loginLogic;
-import ui.adminInterface;
 import ui.loginInterface;
-import data.employeeRecords;
+
 
 public class main {
 
-    public static void main(String[] args) 
-    {
-        roles adminRole = new roles(1, "Admin");
-        User user = new User(1, "Alice","Johnson", "alice@example.com", "password123", adminRole);
+    public static void main(String[] args) {
+        List<User> users = employeeRecords.getDefaultUsers();
 
-        System.out.println(user.getFirstName() + " " + user.getLastName() + " has role: " + user.getRole().getName());
+        adminMangment adminService = new adminMangment(users);
+        loginLogic loginService = new loginLogic(users);
+
+        SwingUtilities.invokeLater(() -> {
+            loginInterface loginUI = new loginInterface(loginService, adminService);
+            loginUI.setVisible(true);
+        });
     }
 }
