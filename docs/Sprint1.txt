@@ -1,0 +1,111 @@
+What Was Completed
+	During Sprint 1, Our team focused on defining the main functionality of our Dental and Orthodontics management system. The first thing we did was identify the most important user stories. These user stories are the basic actions that different users in a dental clinic would need to be able to do within the system. The user stories we selected focused on the main roles in the clinic, including dentists, receptionists, and administrators. Some of the key stories included allowing dentist to log into the system from any computer in the clinic, allowing administrators to create staff accounts and assign roles, allowing receptionists to create patient profiles, allowing dentists to add notes to patient records, and allowing receptionists to schedule patient appointments. 
+	After selecting the user stories, we created acceptance criteria for each story. These criteria explain what conditions must be met for the features to work properly and correctly. An example of this is, login feature should allow unique usernames for each user, show an error message if the password is not right, and include a logout or timeout feature for security. We created user scenarios to describe how users interact with the system. These scenarios help us understand how the system will be used in real situations. We also created paper prototypes that show the main screens of the system, such as the login page, dashboard, patient profile page, and appointment scheduling screen.
+Challenges Encountered
+One challenge we faced during the duration of this sprint was deciding which features were the most important to include first. Our team expected this problem, but we pulled through it. A dental management system can include many features, but we needed to focus on the most essential ones. Because of this overwhelming issue, we decided to prioritize core features such as user login, patient records, and appointment scheduling. We also had trouble making sure our acceptance criteria were clear and specific enough. Some of the original idea were too general, so we worked together to rewrite them so they could clearly describe how the system should behave.
+
+
+
+What Was Deferred or Changed
+While we were discussing, we found some additional features that could be added to the system later. Some examples include billing systems and appointment reminders. We didn’t include these in sprint one because they are pretty advanced and not really required for the basic functionality of the system. We decided a strong foundation was the most important.
+Reflection on Sprint Effectiveness
+Sprint 1 was helpful for understanding the system requirements and how the system should work. Writing user stories and scenarios helped us think about the needs of different users and how they interact with our system. Creating the paper prototypes also helped us visualize the design of the system before development begins. This allowed us to better understand the flow between screens and the layout of the interface. This sprint gave our team a good starting point for our project and overall prepared us for the next sprint.
+
+ 
+
+Sprint plan
+1.	Our goal for this sprint is to identify what user stories are the most important to be implemented first and what the acceptable criteria to complete them is as well as creating a diagram of how our system would work. 
+2.	Selected User Stories:
+    a.	As a dentist, I want to be able to login into my account from any computer in network, so that I can easily see any patients records from any computer in the different rooms. 
+        i.	The reason we selected this story is to give our system role security, meaning different roles have access to different levels of information.
+    b.	As an administrator, I want to be able to create staff accounts and assign roles, so that permissions are controlled
+        i.	We selected this story to establish one of the core foundations of the system of having different user roles and responsibilities
+    c.	As a receptionist, I want to be able to make a patient profile, so that I can store details about the patient.
+        i.	We selected this story for as one of the most important stories of handling patient data as this is a system for a dentist 
+    d.	As a dentist, I want to be able to make notes on patient records, so that the receptionist can fulfill any request I ask or give more information for the next time we see him. 
+        i.	This story was selected to show case the ability of what the doctor can do in the system with inputting information in the patients profile
+    e.	As a receptionist, I want to schedule an appointment, so that patients can reserve a time slot
+        i.	We also selected this story because it is a fundamental part any dentist system of being able to schedule appointments to keep track of the patients being scene that day. 
+
+
+
+
+User stories and scenarios
+3.	As a dentist, I want to be able to login into my account from any computer in network, so that I can easily see any patients records from any computer in the differe	nt rooms. 
+    a.	Acceptable criteria :
+        i.	a unique login email for each person
+        ii.	a time out feature for the application 
+        iii.	if login is unsuccessful say login or password is wrong
+        iv.	a forgot login or password feature 
+        v.	giving access to the different levels of data a role has access to 
+    b.	User scenario:
+        i.	Doctor would open the application 
+        ii.	Input his login information , login and password
+        iii.	If login is successful give access to designated data 
+        iv.	If login is unsuccessful give a popup saying wrong password or login
+        v.	Give an option for forgot password or login 
+4.	As an administrator, I want to be able to create staff accounts and assign roles, so that permissions are controlled
+    a.	Acceptable criteria: 
+        i.	A unique login for the administration
+        ii.	Being able to override logins to put in information usually not available to the role 
+        iii.	Being able to create, change,  and delete unique logins for each role 
+        iv.	Being able to post who is on shift (calendar)
+        v.	Handling employee information 
+    b.	User scenario:
+        i.	The director opens the application to login as the administrator 
+        ii.	Once logged in I open an application to input new employee information 
+        iii.	Once I save the information. A new login and password will be created based on the first and last name
+        iv.	I open a calendar application 
+        v.	I see what shifts are available for what days 
+        vi.	I assign the shift for the next week 
+        vii.	I sign out and close the application 
+5.	As a receptionist, I want to be able to make a patient profile, so that I can store details about the patient.
+    a.	Acceptable criteria: 
+        i.	Being able to create a new patient profile
+        ii.	Being able to store, edit and delete, patient information inside patient profile 
+        iii.	Being able to view patient information 
+    b.	User scenario: 
+        i.	May clicks on a button to create a new patient profile
+        ii.	Patient provides information and may inputs information into the patient profile
+        iii.	May saves the information 
+        iv.	May view the patient profile to review it 
+6.	As a dentist, I want to be able to make notes on patient records, so that the receptionist can fulfill any request I ask or give more information for the next time we see him. 
+    a.	Acceptable Criteria:
+        i.	Being able to view patient information 
+        ii.	Being able to leave a note on the patient profile 
+        iii.	Being able to add, edit and change patient information
+    b.	User scenarios:
+        i.	Dan views patients’ profile.
+        ii.	Dan presses edit button to add information about the infected tooth patient has.
+        iii.	Dan hits save to log information.
+        iv.	Dan presses a note button on the patient profile to leave a reminder. To give instructions to the receptionist.
+        v.	Dan closes the patients profile.
+7.	As a receptionist, I want to schedule an appointment, so that patients can reserve a time slot
+    a.	Acceptable criteria: 
+        i.	Being able to edit a calendar date application 
+        ii.	Being able to link a patient profile to a calendar date 
+        iii.	Being able to set an exact time for an appointment for a patient 
+        iv.	Making sure appointment times don’t overlap 
+    b.	User scenario: 
+        i.	May opens a calendar date application 
+        ii.	She clicks on a specific day and time on the calendar 
+        iii.	She inputs the patient’s name and profile 
+        iv.	She saves the appointment for the patient 
+
+Updated Product Backlog
+    High Priority
+        1.	User Login System 
+        2.	Staff Account Management
+        3.	Patient Profile Creation
+        4.	Appointment scheduling
+    Future Sprints
+        1.	Edit and update patient information
+        2.	View daily appointment schedules
+        3.	Search patient records
+        4.	Dentist Notes on Patient Records
+    Medium Priority
+        1.	Appointment Reminder Notifications
+        2.	Staff Shift Calendar
+    Low priority
+        1.	Billing and Payment management
+

@@ -1,0 +1,82 @@
+
+Brief Overview
+This Dental office management system is a web-based application that is designed to help dental and orthodontic clinics manage their operations in an organized way. The system allows staff to store and manage patient records, schedule and track appointments, make visit notes, and handle some basic billing. Different user roles, such as receptionist, dentists, and administrators, will have access to specific features based on their responsibilities. By implementing these functions into a single system, the application aims to reduce manual errors and improve overall efficiency.
+Why is this meaningful 
+This dental management system is meaningful because it helps modernize how dental clinics handle their daily operations. Many smaller clinics still rely on using paper records or systems that are disconnected. This can lead to information being lost, errors in schedules, and overall inefficient workflows. By moving everything into a centralized online system, staff can quickly access patient records, manage appointments, and being able to update information in real time. In addition, being able to store patient data in a digital system improves its organization and will reduce any need for physical storage. It also allows for better security through controlled access and protection of data, rather than relying on paper files that can easily be misplaced or accessed by anyone who is not authorized to view them. Overall, the system improves efficiency and reliability, leading to better experience for the staff and patients.
+Type of system
+This is a web-based application system with a database created by MySQL or something similar. 
+Vision statement 
+Problem statement 
+A lot of dental offices still often use paper to handle information, and our goal is to create a database and management system that is easily accessible anywhere within the network allowing users to login and immediately see what information they require to see as well as input data or paperwork online to be stored.
+ This approach allows the doctor and any staff to be able to use the system from any computer in the building within the network. It also allows the patient to have a user-friendly interface to be able to schedule appointments and make payments. 
+
+
+Proposed Solution
+Dental online goal is to create a centralized web-management system that allows doctors, receptionists, and dental assistants to edit or view patient data, manage appointments and allow patients to edit appointments as well. 
+Target user & roles
+Administrator
+    •	Manages accounts/roles
+Dentist
+    •	Edit or view patient file 
+    •	Managing the schedule 
+Receptionist
+    •	Handles files/records of patients
+    •	Schedule appointments 
+    •	Manage billing records for patients
+Dental Assistants
+    •	Add notes on the patient file for the dentist 
+    •	View the schedule 
+Patients 
+    •	Add patient information into the database 
+    •	Schedule appointments 
+    •	Make payments 
+
+High level Goals
+    1.	Allowing only certain users to be able to look at a patient’s record. 
+    2.	Implementing patient payment records
+    3.	Keeping patient information organized and easy to search
+    4.	Reduce the amount of scheduling conflicts/prevent any double-books
+    5.	Easy login access for staff
+In Scope
+    •	Basic database and management system
+    •	Login features
+    •	Patient management
+    •	Security of patient records
+    •	Basic billing records
+    •	Appointment management
+    •	Patient appointment notes on patient records
+Out of Scope
+    •	Payment processing 
+    •	Insurance 
+    •	Sending medication to pharmacy 
+    •	Sending patient records outside of network
+    •	Ordering Resources
+Success Criteria 
+This project would be considered successful if 
+    •	Patients can schedule an appointment quickly online 
+    •	Faculty can edit appointments 
+    •	Receptionist can create a new patient and book an appointment
+    •	Dentists can edit patient records and add files
+    •	Billing can mark an invoice paid or unpaid and show patient balance
+    •	A database that stores patient records and appointments
+    •	The system has no critical flaws that prevent it from working 
+
+User Stories
+As a dentist, I want to be able to do my daily schedule, so that I know how many patients I am seeing today and which patients I am seeing. 
+As a dentist, I want to be able to make notes on patient records, so that the receptionist can fulfill any request I ask or give more information for the next time we see him. 
+As a dentist, I want to be able to login into my account from any computer in network, so that I can easily see any patients records from any computer in the different rooms. 
+As a receptionist, I want to be able to make a patient profile, so that I can store details about the patient.
+As a receptionist, I want to search for a patient, so that I can easily and quickly see their information 
+As a receptionist, I want to schedule an appointment, so that patients can reserve a time slot
+As a patient, I want to be able to schedule an appointment online, so that I don’t have to go in person and make an appointment and can do it from my phone or computer. 
+As a dental assistant, I want to be able to leave notes on the patient’s record for the dentist to see, so that he has an idea of what is wrong with the patient and knows how to proceed. 
+As an administrator, I want to be able to create staff accounts and assign roles, so that permissions are controlled
+Initial Risk assessment 
+    •	Website attack on database
+    •	Potential security risk in the database
+    •	Inexperienced in certain areas
+    •	Time management 
+    •	Unrealistic expectations
+    •	Inexperienced in certain areas
+    •	Not familiar with how an actual dentist’s office works
+    •	Integration of GitHub 

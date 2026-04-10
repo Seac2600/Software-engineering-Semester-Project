@@ -1,0 +1,96 @@
+Sprint plan 
+1.	Sprint goal
+    The goal of this sprint is to take 2 of our user stories and define the architecture of those stories and create a runnable project skeleton with those 2 end-to-end user stories. 
+2.	Selected user stories
+    a.	As a dentist, I want to be able to login into my account from any computer in network, so that I can easily see any patients records from any computer in the different rooms.
+        i.	We selected this user story since it would be the first thing the user would interact with in the program. It’s the start of the whole database system without a basic login feature anyone would be able to edit the database. So, we selected this as our foundation for this system.
+    b.	As an administrator, I want to be able to create staff accounts and assign roles, so that permissions are controlled
+        i.	We selected this story because just like the login user story this system is also just as important since it’s the part of the system its job is to create the user roles and profiles so the logic feature can work. Just like how we can’t only have this story we also can’t only have the login story we need both so that’s why we selected these two user stories. 
+Architecture Overview 
+3.	System description
+    This system is a dental office management system that is designed to be a client/server-style application. The purpose of this system is to allow staff members to log in, manage accounts, and access features that are available based on their assigned roles. This system will be organized into separate components for each role that will have its own interface, data management, and business logic according to their own needs depending on the role. This will allow the system to remain organized, secure and easier to expand upon in the future. 
+4.	Major Components
+    the major components for this project will be 
+    a.	User interface’s 
+    b.	Authentication 
+    c.	Role based access control
+    d.	Accounts and staff management
+    e.	Patient records management
+    f.	Appointment scheduling and calendar management
+    g.	Business logic/ service logic
+    h.	A persistence database 
+    i.	Audit/ logging component 
+5.	Responsibilities of each component
+    a.	User interface’s 
+        What this component will do is give a dedicated interface for each staff member and the login screen. This will allow them to interact with the system 
+    b.	Authentication and security 
+        This component would consists of password protection and verifying login credentials to help protect the system.
+    c.	Role-based access control
+        this will determine what each staff role is allowed to view, add or delete based on their role
+    d.	Accounts and staff management
+        Allows the administrators to add, edit and delete staff accounts. It also allows the management of employee roles so that he can change them any time
+    e.	Patient records management
+    f.	Appointment scheduling and calendar management
+    g.	Business logic/ service logic
+    h.	A persistence database 
+    i.	Audit/ logging component 
+    6.	How components interact 
+        when a user starts the program, they will see a login screen that is given from the user interface. When the user interface receives the inputs, the user typed it will check with the login logic to see if that is the correct password and email. The login logic will then see if that is the correct password and email by searching for the data storage component. When it is correct the user interface will show a brand-new interface depending on the role. 
+        When an administrator login in it will have a brand-new interface for the administrator and on that interface will be an account and role management feature that can edit the data storage component allowing the user to input the necessary email and password for those specific employees allowing them to login in with their designated password and email. 
+7.	Initial component structure supporting the User Stories
+    a.	The first user story will have a structure like this 
+    i.	 The dentist will see a login screen from the user interfaces 
+    ii.	The dentist will sign in using the given email and password
+    iii.	The user interface will check with the login logic to see if the password is correct
+    iv.	If correct the dentist will now see dentist specific interface  
+    b.	The second user story will have a structure like this 
+    i.	The admin will see a login screen from the user interfaces 
+    ii.	The admin will sign in using the given email and password
+    iii.	The user interface will check with the login logic to see if the password is correct
+    iv.	If correct the admin will now see a admin specific interface 
+    v.	The admin can then click on a prompt allowing them add, delete, and edit the accounts of the employees. 
+    vi.	When the admin input, edits or deletes data, the account management logic will input that data into the data storage component 
+    vii.	The data storage component will then save theses changes and update the database 
+    Sprint Report 
+8.	What was completed 
+    during this sprint we have gotten a few thing completed. We first decided on what user stories we wanted to implement in this sprint after selecting those two stories. We created the architecture overview to have an understanding of how all the stories interact with each other and created an initial component structure supporting the user stories we selected. Once we understood those then we started creating a basic skeleton of the user stories we selected. What we implemented from our stories was the login interface and the admin management stories. Once we finished coding those stories we then get ready for the next sprint deciding on what we should do next. 
+9.	What challenges were encountered 
+    I think the biggest challenge we encountered during this sprint was understanding how github worked. None of us have worked on github before so it took a while to get everything set up and properly start coding our skeleton. What we had to learn was the proper structure of how we should organize our files and make it look like on github. We also needed to learn how to set up github and how to understand how the repository worked. That took a little bit of research and understanding how were supposed to download gitbash and clone the repository. Once we learned that it also took more time to understand how we only have a main branch and that if were going to work on our part we have to use a separate branch which is just a clone of the main branch. It also took a while to understand how to push and pull to the main branch and how we merge the code. One last thing we had touble was distributing the work because we realized we can’t work on certain parts without other parts getting finished first so we aim to improve that next time. 
+10.	What was deferred or changed
+    not much was changed the only thing we changed on this sprint was the amount of user stories we were going to do at first we were going to do all 3 user stories from sprint 1 but we went ahead and decided to just implement two of them in this sprint since the requirements of this sprint was just a skeleton and we only wanted the fundamentals. 
+11.	Reflection on sprint effectiveness
+    I believe this sprint could’ve been done better for numerous reasons but number one that I had to say reduced the effectiveness was the inexperience of our knowledge in using github because that really did take a while to understand just how it’s supposed to work and caused us to actually start coding really late. The only other thing that I would say we could improve is how we code and that we have a chain of how everything gets done. 
+Updated Product backlog 
+12.	Prioritized list of remaining tasks
+    a.	High Priority
+        i.	Dedicated MySQL database 
+        ii.	Patient Profile Creation
+        iii.	Edit and update patient information
+        iv.	Appointment scheduling
+    b.	Future sprints 
+        i.	View daily appointment schedules
+        ii.	Search patient records
+        iii.	Staff Shift Calendar
+    c.	Medium Priority
+        i.	Dentist Notes on Patient Records
+        ii.	Appointment Reminder Notifications
+    d.	Low priority
+        i.	Billing and Payment management
+13.	Completed vs remaining items 
+    a.	Completed
+        i.	User login system
+        ii.	Staff amount management
+    b.	Remaining items
+        i.	Patient profile creation
+        ii.	Appointment scheduling
+        iii.	Edit and update patient information
+        iv.	View daily appointment schedules
+        v.	Search patient records
+        vi.	Dentist Notes on Patient Records
+        vii.	 Appointment Reminder Notifications
+        viii.	Staff Shift Calendar
+        ix.	Billing and payment management
+    c.	Updates based on sprint 2 
+        We have realized we may have too big of a scope of what we can accomplish before this project is due so in the future, we will be selecting the most important features we think this system will need so not everything will be implemented that we wanted to do. Other than that, what we think we’re making good progress and were ready for sprint 3 
+
+
