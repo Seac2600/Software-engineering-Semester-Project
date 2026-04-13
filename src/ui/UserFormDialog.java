@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import models.User;
-import models.roles;
+import models.Role;
 
 public class UserFormDialog extends JDialog {
     private JTextField firstNameField;
@@ -64,7 +64,7 @@ public class UserFormDialog extends JDialog {
             lastNameField.setText(existingUser.getLastName());
             emailField.setText(existingUser.getEmail());
             passwordField.setText(existingUser.getPassword());
-            roleBox.setSelectedItem(existingUser.getRole().getName());
+            roleBox.setSelectedItem(existingUser.getRole().getRoleName());
         }
 
         formPanel.add(firstLabel);
@@ -110,13 +110,13 @@ public class UserFormDialog extends JDialog {
             return;
         }
 
-        roles role;
+        Role role;
         if ("Admin".equals(roleName)) {
-            role = new roles(1, "Admin");
+            role = new Role(1, "Admin");
         } else if ("Dentist".equals(roleName)) {
-            role = new roles(2, "Dentist");
+            role = new Role(2, "Dentist");
         } else {
-            role = new roles(3, "Receptionist");
+            role = new Role(3, "Receptionist");
         }
 
         userResult = new User(userId, firstName, lastName, email, password, role);

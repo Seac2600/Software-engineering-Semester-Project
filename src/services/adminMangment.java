@@ -1,78 +1,53 @@
 package services;
 
-import java.util.ArrayList;
+import data.UserDAO;
 import java.util.List;
 import models.User;
 
 public class adminMangment {
-    private List<User> users;
+   private UserDAO userDAO;
 
     public adminMangment() {
-        this.users = new ArrayList<>();
+        this.userDAO = new UserDAO();
     }
 
-    public adminMangment(List<User> users) {
-        this.users = users;
+    public adminMangment(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
-    public void addUser(User user) {
-        users.add(user);
+    public boolean addUser(User user) {
+        return userDAO.addUser(user);
     }
 
     public boolean deleteUser(int id) {
         try {
-            return users.removeIf(user -> user.getId() == id);
+            return userDAO.deleteUser(  id);
         } catch (Exception e) {
             return false;
         }
     }
 
     public boolean editUser(User updatedUser) {
-        try {
-            for (int i = 0; i < users.size(); i++) {
-                if (users.get(i).getId() == updatedUser.getId()) {
-                    users.set(i, updatedUser);
-                    return true;
-                }
-            }
-            return false;
-        } catch (Exception e) {
-            return false;
-        }
+    return userDAO.editUser(updatedUser);
     }
 
     public List<User> getUsers() {
-        return users;
+        return userDAO.getAllUsers();
     }
 
     public User findUserById(int id) {
-        for (User user : users) {
-            if (user.getId() == id) {
-                return user;
-            }
-        }
-        return null;
+        return userDAO.findUserById(id);
     }
 
     public User findUserByEmail(String email) {
-        for (User user : users) {
-            if (user.getEmail().equalsIgnoreCase(email)) {
-                return user;
-            }
-        }
-        return null;
+        return userDAO.findUserByEmail(email);
     }
 
     public int getNextUserId() {
-        int maxId = 0;
-        for (User user : users) {
-            if (user.getId() > maxId) {
-                maxId = user.getId();
-            }
-        }
-        return maxId + 1;
+        return userDAO.getNextUserId();
     }
 }
+
 
 
 

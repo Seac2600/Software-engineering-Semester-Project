@@ -1,8 +1,7 @@
 
-import data.employeeRecords;
-import java.util.List;
 import javax.swing.SwingUtilities;
-import models.User;
+
+import data.UserDAO;
 import services.adminMangment;
 import services.loginLogic;
 import ui.loginInterface;
@@ -11,10 +10,9 @@ import ui.loginInterface;
 public class main {
 
     public static void main(String[] args) {
-        List<User> users = employeeRecords.getDefaultUsers();
-
-        adminMangment adminService = new adminMangment(users);
-        loginLogic loginService = new loginLogic(users);
+     
+        adminMangment adminService = new adminMangment();
+        loginLogic loginService = new loginLogic(new UserDAO());
 
         SwingUtilities.invokeLater(() -> {
             loginInterface loginUI = new loginInterface(loginService, adminService);

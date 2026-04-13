@@ -131,7 +131,7 @@ public class adminInterface extends JFrame {
                     user.getFirstName(),
                     user.getLastName(),
                     user.getEmail(),
-                    user.getRole().getName()
+                    user.getRole().getRoleName()
             });
         }
     }

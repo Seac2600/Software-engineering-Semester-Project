@@ -110,7 +110,7 @@ public class loginInterface extends JFrame {
             return;
         }
 
-        if (loggedInUser.getRole().getName().equalsIgnoreCase("Admin")) {
+        if (loggedInUser.getRole().getRoleName().equalsIgnoreCase("Admin")) {
             JOptionPane.showMessageDialog(this, "Welcome, " + loggedInUser.getFirstName() + "!");
             adminInterface adminUI = new adminInterface(adminService);
             adminUI.setVisible(true);
