@@ -36,7 +36,8 @@ public class receptionistInterface extends BaseDashboard {
                 patientService,
                 true,
                 "Patient Management",
-                "Create and update patient profiles."
+                "Create and update patient profiles.",
+                this
             );
             openChildWindow(patientUI);
         });
@@ -48,7 +49,8 @@ public class receptionistInterface extends BaseDashboard {
                 adminService,
                 true,
                 "Appointment Management",
-                "Create and update appointments."
+                "Create and update appointments.",
+                this
             );
             openChildWindow(appointmentUI);
         });

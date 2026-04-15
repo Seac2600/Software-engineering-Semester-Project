@@ -84,7 +84,8 @@ public class adminInterface extends BaseDashboard {
                 patientService,
                 true,
                 "Patient Management",
-                "Create, update, and organize patient records."
+                "Create, update, and organize patient records.",
+                this
             );
             openChildWindow(patientUI);
         });
@@ -96,7 +97,8 @@ public class adminInterface extends BaseDashboard {
                 adminService,
                 true,
                 "Appointment Management",
-                "Schedule and manage office appointments."
+                "Schedule and manage office appointments.",
+                this
             );
             openChildWindow(appointmentUI);
         });

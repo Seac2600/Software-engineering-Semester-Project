@@ -36,7 +36,8 @@ public class dentistInterface extends BaseDashboard {
                 patientService,
                 false,
                 "Patient Records",
-                "View patient information and treatment notes."
+                "View patient information and treatment notes.",
+                this
             );
             openChildWindow(patientUI);
         });
@@ -48,7 +49,8 @@ public class dentistInterface extends BaseDashboard {
                 adminService,
                 false,
                 "Appointment Schedule",
-                "View scheduled patient visits."
+                "View scheduled patient visits.",
+                this
             );
             openChildWindow(appointmentUI);
         });

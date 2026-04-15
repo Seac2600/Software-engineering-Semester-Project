@@ -1,8 +1,11 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.List;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,6 +26,7 @@ public class appointmentInterface extends BaseDashboard {
     private final boolean editable;
     private DefaultTableModel tableModel;
     private JTable appointmentTable;
+    private final BaseDashboard parentWindow;
 
     public appointmentInterface(appointmentManagement appointmentService, patientManagement patientService,
                                 adminMangment adminService, boolean editable, String title, String subtitle) {
@@ -30,6 +34,19 @@ public class appointmentInterface extends BaseDashboard {
         this.patientService = patientService;
         this.adminService = adminService;
         this.editable = editable;
+        this.parentWindow = null;
+        buildBase(title, subtitle);
+        buildUI();
+        loadAppointments();
+    }
+
+    public appointmentInterface(appointmentManagement appointmentService, patientManagement patientService,
+                                adminMangment adminService, boolean editable, String title, String subtitle, BaseDashboard parent) {
+        this.appointmentService = appointmentService;
+        this.patientService = patientService;
+        this.adminService = adminService;
+        this.editable = editable;
+        this.parentWindow = parent;
         buildBase(title, subtitle);
         buildUI();
         loadAppointments();
@@ -48,7 +65,8 @@ public class appointmentInterface extends BaseDashboard {
         appointmentTable.setRowHeight(28);
         contentPanel.add(new JScrollPane(appointmentTable), BorderLayout.CENTER);
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         buttonPanel.setBackground(UIStyle.CARD);
         if (editable) {
             JButton addButton = new JButton("Add Appointment");
@@ -60,9 +78,22 @@ public class appointmentInterface extends BaseDashboard {
             addButton.addActionListener(e -> addAppointment());
             editButton.addActionListener(e -> editAppointment());
             deleteButton.addActionListener(e -> deleteAppointment());
+            buttonPanel.add(Box.createHorizontalGlue());
             buttonPanel.add(addButton);
+            buttonPanel.add(Box.createRigidArea(new Dimension(5, 0)));
             buttonPanel.add(editButton);
+            buttonPanel.add(Box.createRigidArea(new Dimension(5, 0)));
             buttonPanel.add(deleteButton);
+        }
+        if (parentWindow != null) {
+            if (!editable) {
+                buttonPanel.add(Box.createHorizontalGlue());
+            }
+            JButton backButton = new JButton("Back");
+            UIStyle.styleSecondaryButton(backButton);
+            backButton.addActionListener(e -> goBack());
+            buttonPanel.add(Box.createRigidArea(new Dimension(5, 0)));
+            buttonPanel.add(backButton);
         }
         contentPanel.add(buttonPanel, BorderLayout.SOUTH);
     }
@@ -125,5 +156,12 @@ public class appointmentInterface extends BaseDashboard {
             loadAppointments();
             JOptionPane.showMessageDialog(this, "Appointment deleted successfully.");
         }
+    }
+
+    private void goBack() {
+        if (parentWindow != null) {
+            parentWindow.setVisible(true);
+        }
+        dispose();
     }
 }

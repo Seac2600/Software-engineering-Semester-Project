@@ -1,8 +1,11 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.List;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,10 +24,21 @@ public class patientInterface extends BaseDashboard {
     private DefaultTableModel tableModel;
     private JTable patientTable;
     private JTextField searchField;
+    private final BaseDashboard parentWindow;
 
     public patientInterface(patientManagement patientService, boolean editable, String title, String subtitle) {
         this.patientService = patientService;
         this.editable = editable;
+        this.parentWindow = null;
+        buildBase(title, subtitle);
+        buildUI();
+        loadPatients(patientService.getPatients());
+    }
+
+    public patientInterface(patientManagement patientService, boolean editable, String title, String subtitle, BaseDashboard parent) {
+        this.patientService = patientService;
+        this.editable = editable;
+        this.parentWindow = parent;
         buildBase(title, subtitle);
         buildUI();
         loadPatients(patientService.getPatients());
@@ -52,10 +66,11 @@ public class patientInterface extends BaseDashboard {
         JPanel bottomPanel = new JPanel(new BorderLayout(10, 10));
         bottomPanel.setBackground(UIStyle.CARD);
 
-        JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 8));
         searchPanel.setBackground(UIStyle.CARD);
 
-        searchField = new JTextField(20);
+        searchField = new JTextField(14);
+        searchField.setPreferredSize(new Dimension(180, 30));
         UIStyle.styleTextField(searchField);
 
         JButton searchButton = new JButton("Search");
@@ -71,7 +86,8 @@ public class patientInterface extends BaseDashboard {
         searchPanel.add(searchButton);
         searchPanel.add(resetButton);
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         buttonPanel.setBackground(UIStyle.CARD);
 
         if (editable) {
@@ -87,9 +103,23 @@ public class patientInterface extends BaseDashboard {
             editButton.addActionListener(e -> editPatient());
             deleteButton.addActionListener(e -> deletePatient());
 
+            buttonPanel.add(Box.createHorizontalGlue());
             buttonPanel.add(addButton);
+            buttonPanel.add(Box.createRigidArea(new Dimension(5, 0)));
             buttonPanel.add(editButton);
+            buttonPanel.add(Box.createRigidArea(new Dimension(5, 0)));
             buttonPanel.add(deleteButton);
+        }
+
+        if (parentWindow != null) {
+            if (!editable) {
+                buttonPanel.add(Box.createHorizontalGlue());
+            }
+            JButton backButton = new JButton("Back");
+            UIStyle.styleSecondaryButton(backButton);
+            backButton.addActionListener(e -> goBack());
+            buttonPanel.add(Box.createRigidArea(new Dimension(5, 0)));
+            buttonPanel.add(backButton);
         }
 
         bottomPanel.add(searchPanel, BorderLayout.WEST);
@@ -190,5 +220,12 @@ public class patientInterface extends BaseDashboard {
         } else {
             JOptionPane.showMessageDialog(this, "Could not delete patient.");
         }
+    }
+
+    private void goBack() {
+        if (parentWindow != null) {
+            parentWindow.setVisible(true);
+        }
+        dispose();
     }
 }
