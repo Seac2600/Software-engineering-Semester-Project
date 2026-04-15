@@ -1,13 +1,12 @@
 package data;
 
-import java.util.List;
 import models.User;
 
 public class UserDAOTest {
   public static void main(String[] args) {
     UserDAO dao = new UserDAO();
 
-    User user = dao.login("adam@test.com", "1234");
+    User user = dao.login("Edward@mail.com", "Edward123");
 
     if (user != null) {
         System.out.println("Login successful!");

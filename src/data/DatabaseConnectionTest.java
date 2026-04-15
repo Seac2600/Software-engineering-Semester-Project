@@ -6,7 +6,7 @@ public class DatabaseConnectionTest {
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/dental_office_db";
         String username = "root";
-        String password = "Compass2600";
+        String password = "root123";
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             if (connection != null) {

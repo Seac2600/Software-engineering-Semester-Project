@@ -5,7 +5,7 @@ import java.util.List;
 import models.User;
 
 public class adminMangment {
-   private UserDAO userDAO;
+    private final UserDAO userDAO;
 
     public adminMangment() {
         this.userDAO = new UserDAO();
@@ -20,19 +20,19 @@ public class adminMangment {
     }
 
     public boolean deleteUser(int id) {
-        try {
-            return userDAO.deleteUser(  id);
-        } catch (Exception e) {
-            return false;
-        }
+        return userDAO.deleteUser(id);
     }
 
     public boolean editUser(User updatedUser) {
-    return userDAO.editUser(updatedUser);
+        return userDAO.editUser(updatedUser);
     }
 
     public List<User> getUsers() {
         return userDAO.getAllUsers();
+    }
+
+    public List<User> getStaffUsers() {
+        return userDAO.getStaffUsers();
     }
 
     public User findUserById(int id) {
@@ -47,9 +47,6 @@ public class adminMangment {
         return userDAO.getNextUserId();
     }
 }
-
-
-
 
 
 

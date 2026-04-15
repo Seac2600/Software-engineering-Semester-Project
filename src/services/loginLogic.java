@@ -4,8 +4,7 @@ import data.UserDAO;
 import models.User;
 
 public class loginLogic {
-  
-    private UserDAO userDAO;
+    private final UserDAO userDAO;
 
     public loginLogic(UserDAO userDAO) {
         this.userDAO = userDAO;
