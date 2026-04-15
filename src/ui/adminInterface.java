@@ -97,25 +97,43 @@ public class adminInterface extends JFrame {
         JButton editButton = new JButton("Edit Selected");
         JButton deleteButton = new JButton("Delete Selected");
         JButton refreshButton = new JButton("Refresh");
+<<<<<<< Updated upstream
         JButton closeButton = new JButton("Logout");
 
+=======
+    
+>>>>>>> Stashed changes
         UIStyle.styleButton(addButton);
         UIStyle.styleSecondaryButton(editButton);
         UIStyle.styleDangerButton(deleteButton);
         UIStyle.styleSecondaryButton(refreshButton);
+<<<<<<< Updated upstream
         UIStyle.styleSecondaryButton(closeButton);
+=======
+     
+>>>>>>> Stashed changes
 
         addButton.addActionListener(e -> addUser());
         editButton.addActionListener(e -> editSelectedUser());
         deleteButton.addActionListener(e -> deleteSelectedUser());
         refreshButton.addActionListener(e -> loadUsersIntoTable());
+<<<<<<< Updated upstream
         closeButton.addActionListener(e -> dispose());
 
+=======
+
+      
+      
+>>>>>>> Stashed changes
         buttonPanel.add(addButton);
         buttonPanel.add(editButton);
         buttonPanel.add(deleteButton);
         buttonPanel.add(refreshButton);
+<<<<<<< Updated upstream
         buttonPanel.add(closeButton);
+=======
+     
+>>>>>>> Stashed changes
 
         centerCard.add(buttonPanel, BorderLayout.SOUTH);
         add(centerCard, BorderLayout.CENTER);
