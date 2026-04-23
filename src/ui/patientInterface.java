@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import models.Patient;
 import services.patientManagement;
+import services.patientChartManagement;
 
 public class patientInterface extends BaseDashboard {
     private final patientManagement patientService;
@@ -25,6 +26,8 @@ public class patientInterface extends BaseDashboard {
     private JTable patientTable;
     private JTextField searchField;
     private final BaseDashboard parentWindow;
+    private boolean dentistChartMode = false;
+    private patientChartManagement chartService;
 
     public patientInterface(patientManagement patientService, boolean editable, String title, String subtitle) {
         this.patientService = patientService;
@@ -35,14 +38,18 @@ public class patientInterface extends BaseDashboard {
         loadPatients(patientService.getPatients());
     }
 
-    public patientInterface(patientManagement patientService, boolean editable, String title, String subtitle, BaseDashboard parent) {
-        this.patientService = patientService;
-        this.editable = editable;
-        this.parentWindow = parent;
-        buildBase(title, subtitle);
-        buildUI();
-        loadPatients(patientService.getPatients());
-    }
+   public patientInterface(patientManagement patientService, boolean editable, String title,
+                        String subtitle, BaseDashboard parent, boolean dentistChartMode,
+                        patientChartManagement chartService) {
+    this.patientService = patientService;
+    this.editable = editable;
+    this.parentWindow = parent;
+    this.dentistChartMode = dentistChartMode;
+    this.chartService = chartService;
+    buildBase(title, subtitle);
+    buildUI();
+    loadPatients(patientService.getPatients());
+}
 
     private void buildUI() {
         JLabel sectionLabel = new JLabel("Patient Records", SwingConstants.LEFT);
@@ -122,10 +129,45 @@ public class patientInterface extends BaseDashboard {
             buttonPanel.add(backButton);
         }
 
+        if (dentistChartMode) {
+        JButton openFileButton = new JButton("Open Patient File");
+        UIStyle.styleButton(openFileButton);
+
+        openFileButton.addActionListener(e -> openPatientFile());
+
+        buttonPanel.add(Box.createHorizontalGlue());
+        buttonPanel.add(openFileButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(5, 0)));
+     }
+
         bottomPanel.add(searchPanel, BorderLayout.WEST);
         bottomPanel.add(buttonPanel, BorderLayout.EAST);
         contentPanel.add(bottomPanel, BorderLayout.SOUTH);
     }
+
+    private void openPatientFile() {
+    int selectedRow = patientTable.getSelectedRow();
+
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a patient first.");
+        return;
+    }
+
+    int patientId = (int) tableModel.getValueAt(selectedRow, 0);
+    Patient patient = patientService.findPatientById(patientId);
+
+    if (patient == null) {
+        JOptionPane.showMessageDialog(this, "Could not find the selected patient.");
+        return;
+    }
+
+    DentistPatientFileInterface patientFileUI =
+        new DentistPatientFileInterface(patient, chartService, this);
+
+    patientFileUI.setVisible(true);
+    setVisible(false);
+}
+
 
     private void loadPatients(List<Patient> patients) {
         tableModel.setRowCount(0);

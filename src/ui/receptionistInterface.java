@@ -37,7 +37,9 @@ public class receptionistInterface extends BaseDashboard {
                 true,
                 "Patient Management",
                 "Create and update patient profiles.",
-                this
+                this,
+                false,
+                null
             );
             openChildWindow(patientUI);
         });

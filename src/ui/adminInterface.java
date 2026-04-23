@@ -76,6 +76,31 @@ public class adminInterface extends BaseDashboard {
         deleteButton.addActionListener(e -> deleteSelectedUser());
         refreshButton.addActionListener(e -> loadUsersIntoTable());
 
+        patientsButton.addActionListener(e -> {
+            patientInterface patientUI = new patientInterface(
+                patientService,
+                true,
+                "Patient Management",
+                "Create, update, and organize patient records.",
+                this,
+                false,
+                null
+            );
+            openChildWindow(patientUI);
+        });
+
+        appointmentsButton.addActionListener(e -> {
+            appointmentInterface appointmentUI = new appointmentInterface(
+                appointmentService,
+                patientService,
+                adminService,
+                true,
+                "Appointment Management",
+                "Schedule and manage office appointments.",
+                this
+            );
+            openChildWindow(appointmentUI);
+        });
 
         buttonPanel.add(addButton);
         buttonPanel.add(editButton);
