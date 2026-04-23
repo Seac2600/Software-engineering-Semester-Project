@@ -106,13 +106,12 @@ public class AppointmentDAO {
     }
 
     private void fillAppointmentStatement(PreparedStatement stmt, Appointment appointment) throws Exception {
-        stmt.setInt(1, appointment.getPatient().getId());
-        stmt.setInt(2, appointment.getStaffUser().getId());
-        stmt.setString(3, appointment.getAppointmentDate());
-        stmt.setString(4, appointment.getAppointmentTime());
-        stmt.setString(5, appointment.getReason());
-    }
-
+    stmt.setInt(1, appointment.getPatient().getId());
+    stmt.setInt(2, appointment.getStaffUser().getId());
+    stmt.setDate(3, java.sql.Date.valueOf(appointment.getAppointmentDate()));
+    stmt.setTime(4, java.sql.Time.valueOf(appointment.getAppointmentTime()));
+    stmt.setString(5, appointment.getReason());
+}
     private Appointment mapAppointment(ResultSet rs) throws Exception {
         Patient patient = new Patient(
             rs.getInt("patient_id"),
@@ -141,4 +140,34 @@ public class AppointmentDAO {
             rs.getString("reason")
         );
     }
+    public boolean hasAppointmentConflict(Appointment appointment) {
+    String sql = """
+        SELECT COUNT(*)
+        FROM appointments
+        WHERE appointment_date = ?
+          AND appointment_time = ?
+          AND (staff_user_id = ? OR patient_id = ?)
+          AND id <> ?
+    """;
+
+    try (Connection conn = DataConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setDate(1, java.sql.Date.valueOf(appointment.getAppointmentDate()));
+        stmt.setTime(2, java.sql.Time.valueOf(appointment.getAppointmentTime()));
+        stmt.setInt(3, appointment.getStaffUser().getId());
+        stmt.setInt(4, appointment.getPatient().getId());
+        stmt.setInt(5, appointment.getId());
+
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1) > 0;
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return false;
+}
+
 }

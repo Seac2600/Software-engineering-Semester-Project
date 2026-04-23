@@ -2,7 +2,6 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -114,36 +113,71 @@ public class appointmentInterface extends BaseDashboard {
     }
 
     private void addAppointment() {
-        AppointmentFormDialog dialog = new AppointmentFormDialog(this, "Add Appointment", null,
-            patientService.getPatients(), adminService.getStaffUsers());
-        dialog.setVisible(true);
-        Appointment appointment = dialog.getResult();
-        if (appointment != null && appointmentService.addAppointment(appointment)) {
-            loadAppointments();
-            JOptionPane.showMessageDialog(this, "Appointment added successfully.");
-        }
-    }
+    AppointmentFormDialog dialog = new AppointmentFormDialog(
+        this,
+        "Add Appointment",
+        null,
+        patientService.getPatients(),
+        adminService.getStaffUsers()
+    );
 
-    private void editAppointment() {
-        int selectedRow = appointmentTable.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Please select an appointment first.");
+    dialog.setVisible(true);
+    Appointment appointment = dialog.getResult();
+
+    if (appointment != null) {
+        if (appointmentService.hasAppointmentConflict(appointment)) {
+            JOptionPane.showMessageDialog(this, "Appointment conflict: the selected patient or staff member already has an appointment at that time.");
             return;
         }
-        int appointmentId = (int) tableModel.getValueAt(selectedRow, 0);
-        Appointment existing = appointmentService.findAppointmentById(appointmentId);
-        AppointmentFormDialog dialog = new AppointmentFormDialog(this, "Edit Appointment", existing,
-            patientService.getPatients(), adminService.getStaffUsers());
-        dialog.setVisible(true);
-        Appointment updated = dialog.getResult();
-        if (updated != null) {
-            updated.setId(appointmentId);
-            if (appointmentService.editAppointment(updated)) {
-                loadAppointments();
-                JOptionPane.showMessageDialog(this, "Appointment updated successfully.");
-            }
+
+        if (appointmentService.addAppointment(appointment)) {
+            loadAppointments();
+            JOptionPane.showMessageDialog(this, "Appointment added successfully.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Could not add appointment.");
         }
     }
+}
+    
+
+    private void editAppointment() {
+    int selectedRow = appointmentTable.getSelectedRow();
+
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Please select an appointment first.");
+        return;
+    }
+
+    int appointmentId = (int) tableModel.getValueAt(selectedRow, 0);
+    Appointment existing = appointmentService.findAppointmentById(appointmentId);
+
+    AppointmentFormDialog dialog = new AppointmentFormDialog(
+        this,
+        "Edit Appointment",
+        existing,
+        patientService.getPatients(),
+        adminService.getStaffUsers()
+    );
+
+    dialog.setVisible(true);
+    Appointment updated = dialog.getResult();
+
+    if (updated != null) {
+        updated.setId(appointmentId);
+
+        if (appointmentService.hasAppointmentConflict(updated)) {
+            JOptionPane.showMessageDialog(this, "Appointment conflict: the selected patient or staff member already has an appointment at that time.");
+            return;
+        }
+
+        if (appointmentService.editAppointment(updated)) {
+            loadAppointments();
+            JOptionPane.showMessageDialog(this, "Appointment updated successfully.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Could not update appointment.");
+        }
+    }
+}
 
     private void deleteAppointment() {
         int selectedRow = appointmentTable.getSelectedRow();

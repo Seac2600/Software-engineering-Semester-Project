@@ -90,26 +90,46 @@ public class UserFormDialog extends JDialog {
     }
 
     private void saveUser() {
-        String firstName = firstNameField.getText().trim();
-        String lastName = lastNameField.getText().trim();
-        String email = emailField.getText().trim();
-        String password = new String(passwordField.getPassword());
-        String roleName = ((String) roleBox.getSelectedItem()).toUpperCase();
+    String firstName = firstNameField.getText().trim();
+    String lastName = lastNameField.getText().trim();
+    String email = emailField.getText().trim();
+    String password = new String(passwordField.getPassword());
+    String roleName = ((String) roleBox.getSelectedItem()).toUpperCase();
 
-        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill in all fields.");
-            return;
-        }
-
-        int roleId = switch (roleName) {
-            case "ADMIN" -> 1;
-            case "DENTIST" -> 2;
-            default -> 3;
-        };
-
-        userResult = new User(userId, firstName, lastName, email, password, new Role(roleId, roleName));
-        dispose();
+    if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+        return;
     }
+
+    if (!firstName.matches("[A-Za-z ]+")) {
+        JOptionPane.showMessageDialog(this, "First name can only contain letters and spaces.");
+        return;
+    }
+
+    if (!lastName.matches("[A-Za-z ]+")) {
+        JOptionPane.showMessageDialog(this, "Last name can only contain letters and spaces.");
+        return;
+    }
+
+    if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid email address.");
+        return;
+    }
+
+    if (password.length() < 6) {
+        JOptionPane.showMessageDialog(this, "Password must be at least 6 characters long.");
+        return;
+    }
+
+    int roleId = switch (roleName) {
+        case "ADMIN" -> 1;
+        case "DENTIST" -> 2;
+        default -> 3;
+    };
+
+    userResult = new User(userId, firstName, lastName, email, password, new Role(roleId, roleName));
+    dispose();
+}
 
     public User getUserResult() { return userResult; }
 }

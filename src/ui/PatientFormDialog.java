@@ -105,35 +105,50 @@ public class PatientFormDialog extends JDialog {
     }
 
     private void savePatient() {
-        String firstName = firstNameField.getText().trim();
-        String lastName = lastNameField.getText().trim();
-        String phone = phoneField.getText().trim();
-        String dob = dobField.getText().trim();
-        String address = addressField.getText().trim();
-        String notes = notesArea.getText().trim();
+    String firstName = firstNameField.getText().trim();
+    String lastName = lastNameField.getText().trim();
+    String phone = phoneField.getText().trim();
+    String dob = dobField.getText().trim();
+    String address = addressField.getText().trim();
+    String notes = notesArea.getText().trim();
 
-        if (firstName.isEmpty() || lastName.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "First and last name are required.");
-            return;
-        }
-
-        if (!dob.isEmpty() && !dob.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            JOptionPane.showMessageDialog(this, "Date of birth must be in YYYY-MM-DD format.");
-            return;
-        }
-
-        result = new Patient(
-            patientId,
-            firstName,
-            lastName,
-            phone,
-            dob,
-            address,
-            notes
-        );
-
-        dispose();
+    if (firstName.isEmpty() || lastName.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "First and last name are required.");
+        return;
     }
+
+    if (!phone.isEmpty() && !phone.matches("\\d{3}-\\d{3}-\\d{4}|\\d{10}")) {
+        JOptionPane.showMessageDialog(this, "Phone must be in 123-456-7890 or 1234567890 format.");
+        return;
+    }
+
+    if (!dob.isEmpty() && !dob.matches("\\d{4}-\\d{2}-\\d{2}")) {
+        JOptionPane.showMessageDialog(this, "Date of birth must be in YYYY-MM-DD format.");
+        return;
+    }
+
+    if (address.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Address is required.");
+        return;
+    }
+
+    if (notes.length() > 500) {
+        JOptionPane.showMessageDialog(this, "Notes must be 500 characters or less.");
+        return;
+    }
+
+    result = new Patient(
+        patientId,
+        firstName,
+        lastName,
+        phone,
+        dob,
+        address,
+        notes
+    );
+
+    dispose();
+}
 
     public Patient getResult() {
         return result;
