@@ -64,15 +64,12 @@ public class adminInterface extends BaseDashboard {
         JButton editButton = new JButton("Edit Selected");
         JButton deleteButton = new JButton("Delete Selected");
         JButton refreshButton = new JButton("Refresh");
-        JButton patientsButton = new JButton("Open Patients");
-        JButton appointmentsButton = new JButton("Open Appointments");
-
+      
         UIStyle.styleButton(addButton);
         UIStyle.styleSecondaryButton(editButton);
         UIStyle.styleDangerButton(deleteButton);
         UIStyle.styleSecondaryButton(refreshButton);
-        UIStyle.styleSuccessButton(patientsButton);
-        UIStyle.styleSuccessButton(appointmentsButton);
+    
 
         addButton.addActionListener(e -> addUser());
         editButton.addActionListener(e -> editSelectedUser());
@@ -109,8 +106,7 @@ public class adminInterface extends BaseDashboard {
         buttonPanel.add(editButton);
         buttonPanel.add(deleteButton);
         buttonPanel.add(refreshButton);
-        buttonPanel.add(patientsButton);
-        buttonPanel.add(appointmentsButton);
+    
 
         wrapper.add(buttonPanel, BorderLayout.SOUTH);
         contentPanel.add(wrapper, BorderLayout.CENTER);
