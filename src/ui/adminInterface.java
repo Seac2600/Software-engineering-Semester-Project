@@ -64,17 +64,46 @@ public class adminInterface extends BaseDashboard {
         JButton editButton = new JButton("Edit Selected");
         JButton deleteButton = new JButton("Delete Selected");
         JButton refreshButton = new JButton("Refresh");
+        JButton patientsButton = new JButton("Patients");
+        JButton appointmentsButton = new JButton("Appointments");
       
         UIStyle.styleButton(addButton);
         UIStyle.styleSecondaryButton(editButton);
         UIStyle.styleDangerButton(deleteButton);
         UIStyle.styleSecondaryButton(refreshButton);
+        UIStyle.styleSecondaryButton(patientsButton);
+        UIStyle.styleSecondaryButton(appointmentsButton);
     
 
         addButton.addActionListener(e -> addUser());
         editButton.addActionListener(e -> editSelectedUser());
         deleteButton.addActionListener(e -> deleteSelectedUser());
         refreshButton.addActionListener(e -> loadUsersIntoTable());
+        patientsButton.addActionListener(e -> {
+            patientInterface patientUI = new patientInterface(
+                patientService,
+                true,
+                "Patient Management",
+                "Create, update, and organize patient records.",
+                this,
+                false,
+                null
+            );
+            openChildWindow(patientUI);
+        });
+
+        appointmentsButton.addActionListener(e -> {
+            appointmentInterface appointmentUI = new appointmentInterface(
+                appointmentService,
+                patientService,
+                adminService,
+                true,
+                "Appointment Management",
+                "Schedule and manage office appointments.",
+                this
+            );
+            openChildWindow(appointmentUI);
+        });
 
         patientsButton.addActionListener(e -> {
             patientInterface patientUI = new patientInterface(
@@ -106,6 +135,8 @@ public class adminInterface extends BaseDashboard {
         buttonPanel.add(editButton);
         buttonPanel.add(deleteButton);
         buttonPanel.add(refreshButton);
+        buttonPanel.add(patientsButton);
+        buttonPanel.add(appointmentsButton);
     
 
         wrapper.add(buttonPanel, BorderLayout.SOUTH);
