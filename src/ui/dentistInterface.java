@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import services.adminMangment;
 import services.appointmentManagement;
 import services.patientManagement;
+import services.patientChartManagement;
 
 public class dentistInterface extends BaseDashboard {
     private final patientManagement patientService;
@@ -37,7 +38,9 @@ public class dentistInterface extends BaseDashboard {
                 false,
                 "Patient Records",
                 "View patient information and treatment notes.",
-                this
+                this,
+                true,
+                new services.patientChartManagement()
             );
             openChildWindow(patientUI);
         });

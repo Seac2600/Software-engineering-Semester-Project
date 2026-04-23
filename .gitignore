@@ -1,0 +1,22 @@
+# Compiled class files
+*.class
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+
+# Log files
+*.log
+
+# Database files (if using local SQLite, but MySQL is remote)
+# *.db
+# *.sqlite

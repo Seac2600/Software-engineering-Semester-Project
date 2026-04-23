@@ -85,7 +85,9 @@ public class adminInterface extends BaseDashboard {
                 true,
                 "Patient Management",
                 "Create, update, and organize patient records.",
-                this
+                this,
+                false,
+                null
             );
             openChildWindow(patientUI);
         });
