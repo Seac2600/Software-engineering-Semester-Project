@@ -107,7 +107,7 @@ public class loginInterface extends JFrame {
         String roleName = loggedInUser.getRole().getRoleName().toUpperCase();
         JOptionPane.showMessageDialog(this, "Welcome, " + loggedInUser.getFirstName() + "!");
         switch (roleName) {
-            case "ADMIN" -> new adminInterface(adminService, patientService, appointmentService).setVisible(true);
+            case "ADMIN" -> new adminInterface(adminService).setVisible(true);
             case "RECEPTIONIST" -> new receptionistInterface(patientService, appointmentService, adminService).setVisible(true);
             case "DENTIST" -> new dentistInterface(patientService, appointmentService, adminService).setVisible(true);
             default -> JOptionPane.showMessageDialog(this, "No dashboard is configured for this role yet.");

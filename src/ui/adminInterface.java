@@ -15,21 +15,15 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import models.User;
 import services.adminMangment;
-import services.appointmentManagement;
-import services.patientManagement;
 
 public class adminInterface extends BaseDashboard {
     private final adminMangment adminService;
-    private final patientManagement patientService;
-    private final appointmentManagement appointmentService;
     private DefaultTableModel tableModel;
     private JTable userTable;
 
-    public adminInterface(adminMangment adminService, patientManagement patientService, appointmentManagement appointmentService) {
+    public adminInterface(adminMangment adminService) {
         this.adminService = adminService;
-        this.patientService = patientService;
-        this.appointmentService = appointmentService;
-        buildBase("Admin Dashboard", "Manage staff accounts, patients, and appointments.");
+        buildBase("Admin Dashboard", "Manage staff accounts only.");
         buildUI();
         loadUsersIntoTable();
     }
@@ -64,79 +58,22 @@ public class adminInterface extends BaseDashboard {
         JButton editButton = new JButton("Edit Selected");
         JButton deleteButton = new JButton("Delete Selected");
         JButton refreshButton = new JButton("Refresh");
-        JButton patientsButton = new JButton("Patients");
-        JButton appointmentsButton = new JButton("Appointments");
       
         UIStyle.styleButton(addButton);
         UIStyle.styleSecondaryButton(editButton);
         UIStyle.styleDangerButton(deleteButton);
         UIStyle.styleSecondaryButton(refreshButton);
-        UIStyle.styleSecondaryButton(patientsButton);
-        UIStyle.styleSecondaryButton(appointmentsButton);
     
 
         addButton.addActionListener(e -> addUser());
         editButton.addActionListener(e -> editSelectedUser());
         deleteButton.addActionListener(e -> deleteSelectedUser());
         refreshButton.addActionListener(e -> loadUsersIntoTable());
-        patientsButton.addActionListener(e -> {
-            patientInterface patientUI = new patientInterface(
-                patientService,
-                true,
-                "Patient Management",
-                "Create, update, and organize patient records.",
-                this,
-                false,
-                null
-            );
-            openChildWindow(patientUI);
-        });
-
-        appointmentsButton.addActionListener(e -> {
-            appointmentInterface appointmentUI = new appointmentInterface(
-                appointmentService,
-                patientService,
-                adminService,
-                true,
-                "Appointment Management",
-                "Schedule and manage office appointments.",
-                this
-            );
-            openChildWindow(appointmentUI);
-        });
-
-        patientsButton.addActionListener(e -> {
-            patientInterface patientUI = new patientInterface(
-                patientService,
-                true,
-                "Patient Management",
-                "Create, update, and organize patient records.",
-                this,
-                false,
-                null
-            );
-            openChildWindow(patientUI);
-        });
-
-        appointmentsButton.addActionListener(e -> {
-            appointmentInterface appointmentUI = new appointmentInterface(
-                appointmentService,
-                patientService,
-                adminService,
-                true,
-                "Appointment Management",
-                "Schedule and manage office appointments.",
-                this
-            );
-            openChildWindow(appointmentUI);
-        });
 
         buttonPanel.add(addButton);
         buttonPanel.add(editButton);
         buttonPanel.add(deleteButton);
         buttonPanel.add(refreshButton);
-        buttonPanel.add(patientsButton);
-        buttonPanel.add(appointmentsButton);
     
 
         wrapper.add(buttonPanel, BorderLayout.SOUTH);
