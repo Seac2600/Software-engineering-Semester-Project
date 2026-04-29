@@ -1,8 +1,12 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.net.URL;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -41,7 +45,7 @@ public class loginInterface extends JFrame {
 
     private void buildUI() {
         setTitle("Dental Office Login");
-        setSize(750, 520);
+        setSize(1050, 728);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         getContentPane().setBackground(UIStyle.BACKGROUND);
@@ -54,17 +58,26 @@ public class loginInterface extends JFrame {
         JPanel cardPanel = new JPanel(new BorderLayout(0, 18));
         UIStyle.styleCard(cardPanel);
 
-        JPanel titlePanel = new JPanel(new BorderLayout(0, 8));
+        JPanel titlePanel = new JPanel(new BorderLayout(0, 12));
         titlePanel.setBackground(UIStyle.CARD);
 
-        JLabel titleLabel = new JLabel("Dental Office Management System", SwingConstants.CENTER);
-        JLabel subtitleLabel = new JLabel("Sign in to access your role-based dashboard.", SwingConstants.CENTER);
+        ImageIcon logoIcon = loadLogoIcon();
+        JLabel logoLabel = new JLabel(logoIcon, SwingConstants.CENTER);
+
+        JLabel welcomeLabel = new JLabel("Welcome Back", SwingConstants.CENTER);
+        JLabel subtitleLabel = new JLabel("Sign in to access your dashboard.", SwingConstants.CENTER);
         JLabel demoLabel = new JLabel("Demo accounts: Edward@mail.com / Edward123", SwingConstants.CENTER);
-        UIStyle.styleLabel(titleLabel, UIStyle.TITLE_FONT, UIStyle.TEXT);
+        UIStyle.styleLabel(welcomeLabel, UIStyle.HEADING_FONT, UIStyle.PRIMARY_DARK);
         UIStyle.styleLabel(subtitleLabel, UIStyle.BODY_FONT, UIStyle.SUBTLE);
         UIStyle.styleLabel(demoLabel, UIStyle.SMALL_FONT, UIStyle.PRIMARY_DARK);
-        titlePanel.add(titleLabel, BorderLayout.NORTH);
-        titlePanel.add(subtitleLabel, BorderLayout.CENTER);
+
+        JPanel titleTextPanel = new JPanel(new GridLayout(2, 1, 0, 4));
+        titleTextPanel.setBackground(UIStyle.CARD);
+        titleTextPanel.add(welcomeLabel);
+        titleTextPanel.add(subtitleLabel);
+
+        titlePanel.add(logoLabel, BorderLayout.NORTH);
+        titlePanel.add(titleTextPanel, BorderLayout.CENTER);
         titlePanel.add(demoLabel, BorderLayout.SOUTH);
 
         JPanel formPanel = new JPanel(new GridLayout(4, 1, 8, 8));
@@ -133,6 +146,30 @@ public class loginInterface extends JFrame {
             default -> JOptionPane.showMessageDialog(this, "No dashboard is configured for this role yet.");
         }
         dispose();
+    }
+
+    private ImageIcon loadLogoIcon() {
+        String resourcePath = "/resources/OrthocoreLogo.png";
+        URL logoUrl = getClass().getResource(resourcePath);
+        ImageIcon icon;
+        if (logoUrl != null) {
+            icon = new ImageIcon(logoUrl);
+        } else {
+            icon = new ImageIcon("src/resources/OrthocoreLogo.png");
+        }
+
+        int maxWidth = 180;
+        int maxHeight = 180;
+        int width = icon.getIconWidth();
+        int height = icon.getIconHeight();
+        if (width > 0 && height > 0 && (width > maxWidth || height > maxHeight)) {
+            double scaleFactor = Math.min((double) maxWidth / width, (double) maxHeight / height);
+            int newWidth = (int) Math.round(width * scaleFactor);
+            int newHeight = (int) Math.round(height * scaleFactor);
+            Image scaled = icon.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+            icon = new ImageIcon(scaled);
+        }
+        return icon;
     }
 
     private void openForgotPasswordDialog() {
