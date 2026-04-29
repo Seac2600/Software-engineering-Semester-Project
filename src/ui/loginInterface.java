@@ -66,10 +66,14 @@ public class loginInterface extends JFrame {
 
         JLabel welcomeLabel = new JLabel("Welcome Back", SwingConstants.CENTER);
         JLabel subtitleLabel = new JLabel("Sign in to access your dashboard.", SwingConstants.CENTER);
-        JLabel demoLabel = new JLabel("Demo accounts: Edward@mail.com / Edward123", SwingConstants.CENTER);
+        JLabel demoLabel = new JLabel("Demo Administrator account: Edward@mail.com / Edward123", SwingConstants.CENTER);
+        JLabel demoLabel2 = new JLabel("Demo Dentist accounts: adam@mail.com / adam456", SwingConstants.CENTER);
+        JLabel demoLabel3 = new JLabel("Demo Receptionist accounts: Elisha@mail.com / Elisha789", SwingConstants.CENTER);
         UIStyle.styleLabel(welcomeLabel, UIStyle.HEADING_FONT, UIStyle.PRIMARY_DARK);
         UIStyle.styleLabel(subtitleLabel, UIStyle.BODY_FONT, UIStyle.SUBTLE);
         UIStyle.styleLabel(demoLabel, UIStyle.SMALL_FONT, UIStyle.PRIMARY_DARK);
+        UIStyle.styleLabel(demoLabel2, UIStyle.SMALL_FONT, UIStyle.PRIMARY_DARK);
+        UIStyle.styleLabel(demoLabel3, UIStyle.SMALL_FONT, UIStyle.PRIMARY_DARK);
 
         JPanel titleTextPanel = new JPanel(new GridLayout(2, 1, 0, 4));
         titleTextPanel.setBackground(UIStyle.CARD);
@@ -78,8 +82,16 @@ public class loginInterface extends JFrame {
 
         titlePanel.add(logoLabel, BorderLayout.NORTH);
         titlePanel.add(titleTextPanel, BorderLayout.CENTER);
-        titlePanel.add(demoLabel, BorderLayout.SOUTH);
 
+        JPanel demoPanel = new JPanel(new GridLayout(3, 1, 0, 4));
+        demoPanel.setBackground(UIStyle.CARD);
+
+        demoPanel.add(demoLabel);
+        demoPanel.add(demoLabel2);
+        demoPanel.add(demoLabel3);
+
+        titlePanel.add(demoPanel, BorderLayout.SOUTH);
+    
         JPanel formPanel = new JPanel(new GridLayout(4, 1, 8, 8));
         formPanel.setBackground(UIStyle.CARD);
         JLabel emailLabel = new JLabel("Email");
