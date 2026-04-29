@@ -11,19 +11,24 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import models.User;
 import services.adminMangment;
 import services.appointmentManagement;
 import services.loginLogic;
 import services.patientManagement;
 
+@SuppressWarnings("serial")
 public class loginInterface extends JFrame {
-    private final loginLogic loginService;
-    private final adminMangment adminService;
-    private final patientManagement patientService;
-    private final appointmentManagement appointmentService;
+    private static final long serialVersionUID = 1L;
+    private final transient loginLogic loginService;
+    private final transient adminMangment adminService;
+    private final transient patientManagement patientService;
+    private final transient appointmentManagement appointmentService;
     private JTextField emailField;
     private JPasswordField passwordField;
+    private JButton forgotPasswordButton;
+    private int failedLoginAttempts = 0;
 
     public loginInterface(loginLogic loginService, adminMangment adminService, patientManagement patientService,
                           appointmentManagement appointmentService) {
@@ -37,7 +42,7 @@ public class loginInterface extends JFrame {
     private void buildUI() {
         setTitle("Dental Office Login");
         setSize(750, 520);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         getContentPane().setBackground(UIStyle.BACKGROUND);
         setLayout(new BorderLayout());
@@ -82,6 +87,12 @@ public class loginInterface extends JFrame {
         loginButton.addActionListener(e -> handleLogin());
         buttonPanel.add(loginButton);
 
+        forgotPasswordButton = new JButton("Forgot Password?");
+        UIStyle.styleSecondaryButton(forgotPasswordButton);
+        forgotPasswordButton.setVisible(false);
+        forgotPasswordButton.addActionListener(e -> openForgotPasswordDialog());
+        buttonPanel.add(forgotPasswordButton);
+
         cardPanel.add(titlePanel, BorderLayout.NORTH);
         cardPanel.add(formPanel, BorderLayout.CENTER);
         cardPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -100,10 +111,19 @@ public class loginInterface extends JFrame {
 
         User loggedInUser = loginService.authenticate(email, password);
         if (loggedInUser == null) {
-            JOptionPane.showMessageDialog(this, "Login failed. Invalid email or password.");
+            failedLoginAttempts++;
+            if (failedLoginAttempts >= 5) {
+                forgotPasswordButton.setVisible(true);
+                JOptionPane.showMessageDialog(this,
+                    "Login failed. Invalid email or password.\n" );
+            } else {
+                JOptionPane.showMessageDialog(this,
+                    "Login failed. Invalid email or password.\n");
+            }
             return;
         }
 
+        failedLoginAttempts = 0;
         String roleName = loggedInUser.getRole().getRoleName().toUpperCase();
         JOptionPane.showMessageDialog(this, "Welcome, " + loggedInUser.getFirstName() + "!");
         switch (roleName) {
@@ -113,5 +133,10 @@ public class loginInterface extends JFrame {
             default -> JOptionPane.showMessageDialog(this, "No dashboard is configured for this role yet.");
         }
         dispose();
+    }
+
+    private void openForgotPasswordDialog() {
+        ForgotPasswordDialog dialog = new ForgotPasswordDialog(this, loginService);
+        dialog.setVisible(true);
     }
 }

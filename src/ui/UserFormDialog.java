@@ -96,7 +96,7 @@ public class UserFormDialog extends JDialog {
     String password = new String(passwordField.getPassword());
     String roleName = ((String) roleBox.getSelectedItem()).toUpperCase();
 
-    if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+    if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Please fill in all fields.");
         return;
     }
@@ -113,11 +113,6 @@ public class UserFormDialog extends JDialog {
 
     if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
         JOptionPane.showMessageDialog(this, "Please enter a valid email address.");
-        return;
-    }
-
-    if (password.length() < 6) {
-        JOptionPane.showMessageDialog(this, "Password must be at least 6 characters long.");
         return;
     }
 

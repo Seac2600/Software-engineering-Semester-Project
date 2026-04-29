@@ -3,6 +3,7 @@ package data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import models.Role;
@@ -111,6 +112,19 @@ public class UserDAO {
         }
     }
 
+    public boolean updatePassword(int userId, String newPassword) {
+        String sql = "UPDATE users SET password = ? WHERE id = ?";
+        try (Connection conn = DataConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, newPassword);
+            stmt.setInt(2, userId);
+            return stmt.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean deleteUser(int id) {
         String sql = "DELETE FROM users WHERE id = ?";
         try (Connection conn = DataConnection.getConnection();
@@ -181,7 +195,7 @@ public class UserDAO {
         return 1;
     }
 
-    private User mapUser(ResultSet rs) throws Exception {
+    private User mapUser(ResultSet rs) throws SQLException {
         Role role = new Role(rs.getInt("role_id"), rs.getString("role_name"));
         return new User(
             rs.getInt("id"),
